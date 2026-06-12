@@ -15,10 +15,6 @@
             --btn-no: #ff0055;
         }
 
-        html, body {
-            height: 100%;
-        }
-
         body {
             font-family: 'Courier New', Courier, monospace, sans-serif;
             background-color: var(--bg-color);
@@ -28,54 +24,43 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100%;
+            min-height: 100vh;
             background-image: linear-gradient(rgba(102, 252, 241, 0.03) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(102, 252, 241, 0.03) 1px, transparent 1px);
             background-size: 20px 20px;
             box-sizing: border-box;
-            position: relative;
         }
 
-        /* CONTAINER DO VÍDEO EM TELA CHEIA FIXO */
-        .video-background {
+        /* CONFIGURAÇÃO DO VÍDEO COMO PLANO DE FUNDO TELA CHEIA */
+        .video-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Garante que fica atrás de tudo */
             overflow: hidden;
-            opacity: 0.25;
-            pointer-events: none;
+            opacity: 0.25; /* Leve transparência (ajuste aqui se quiser mais escuro ou claro) */
+            pointer-events: none; /* Impede que cliques acidentais pausem o vídeo */
         }
 
-        /* EFEITO COVER REAL NO IFRAME */
-        .video-background iframe {
+        /* Faz o iframe cobrir a tela inteira simulando 'background-size: cover' */
+        .video-container iframe {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
-            height: 100vh;
+            height: 56.25vw; /* Proporção 16:9 */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 100 * 16 / 9 */
             transform: translate(-50%, -50%);
-            object-fit: cover;
-            aspect-ratio: 16 / 9;
-        }
-
-        @media (min-aspect-ratio: 16/9) {
-            .video-background iframe {
-                height: 56.25vw;
-            }
-        }
-        @media (max-aspect-ratio: 16/9) {
-            .video-background iframe {
-                width: 177.78vh;
-            }
+            border: 0;
         }
 
         .container {
             max-width: 450px;
             width: 100%;
-            background: rgba(31, 40, 51, 0.92);
+            background: rgba(31, 40, 51, 0.9); /* Adicionado um pouco de transparência ao card para mesclar com o fundo */
             border-radius: 12px;
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 20px rgba(102, 252, 241, 0.3);
@@ -84,8 +69,6 @@
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(3px);
-            margin: auto;
         }
 
         .container::before {
@@ -369,8 +352,7 @@
 </head>
 <body>
 
-    <!-- O URL ABAIXO JÁ CONTÉM OS PARÂMETROS DE LOOP ATIVOS -->
-    <div class="video-background">
+    <div class="video-container">
         <iframe
             src="https://www.youtube.com/embed/CALw6QK6Qp8?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&fs=0&disablekb=1&iv_load_policy=3&loop=1&playlist=CALw6QK6Qp8"
             title="Player"
