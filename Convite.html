@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henrique - LVL_18 unlocked!</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --neon-blue: #66fcf1;
+            --neon-green: #45f3ff;
+            --text-main: #c5c6c7;
+            --btn-yes: #00ff87;
+            --btn-no: #ff0055;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100%;
+            background-image: linear-gradient(rgba(102, 252, 241, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(102, 252, 241, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* CONTAINER DO VÍDEO EM TELA CHEIA FIXO */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* EFEITO COVER REAL NO IFRAME */
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+        }
+
+        @media (min-aspect-ratio: 16/9) {
+            .video-background iframe {
+                height: 56.25vw;
+            }
+        }
+        @media (max-aspect-ratio: 16/9) {
+            .video-background iframe {
+                width: 177.78vh;
+            }
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(31, 40, 51, 0.92);
+            border-radius: 12px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.3);
+            padding: 30px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(3px);
+            margin: auto;
+        }
+
+        .container::before {
+            content: "PLAYER_1: HENRIQUE // LVL_18";
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 0.7rem;
+            color: rgba(102, 252, 241, 0.5);
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .subheader {
+            color: var(--neon-blue);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .intro {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #a9b7c6;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .intro p {
+            margin: 0 0 10px 0;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .details-box {
+            background-color: #0b0c10;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .icon {
+            font-size: 1.3rem;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+
+        .detail-text strong {
+            display: block;
+            color: var(--neon-blue);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-text span {
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        .map-link-text {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .map-link-text:hover {
+            color: var(--neon-blue);
+        }
+
+        .deadline {
+            font-weight: bold;
+            color: #ffc107;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            text-shadow: 0 0 5px rgba(255,193,7,0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .input-name {
+            width: 100%;
+            padding: 12px;
+            background: #0b0c10;
+            border: 1px solid var(--neon-blue);
+            border-radius: 6px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .input-name:focus {
+            box-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-map {
+            background-color: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .btn-map:hover {
+            background-color: rgba(102, 252, 241, 0.1);
+            box-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+        }
+
+        .btn-yes {
+            background-color: transparent;
+            color: var(--btn-yes);
+            border: 2px solid var(--btn-yes);
+        }
+
+        .btn-yes:hover:not(:disabled) {
+            background-color: var(--btn-yes);
+            color: #000;
+            box-shadow: 0 0 15px var(--btn-yes);
+        }
+
+        .btn-no {
+            background-color: transparent;
+            color: var(--btn-no);
+            border: 2px solid var(--btn-no);
+        }
+
+        .btn-no:hover:not(:disabled) {
+            background-color: var(--btn-no);
+            color: #000;
+            box-shadow: 0 0 15px var(--btn-no);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .stats-box {
+            background-color: #0b0c10;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border: 1px dashed rgba(102, 252, 241, 0.4);
+            text-align: left;
+        }
+
+        .stats-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .stats-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .stats-label {
+            width: 50px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .bar-track {
+            flex-grow: 1;
+            background-color: #23252f;
+            height: 12px;
+            border-radius: 3px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.8s ease-out;
+        }
+
+        .bar-yes {
+            background-color: var(--btn-yes);
+            box-shadow: 0 0 8px var(--btn-yes);
+        }
+
+        .bar-no {
+            background-color: var(--btn-no);
+            box-shadow: 0 0 8px var(--btn-no);
+        }
+
+        .stats-value {
+            width: 25px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .stats-total {
+            font-size: 0.75rem;
+            color: #888;
+            text-align: center;
+            margin-top: 10px;
+            border-top: 1px dashed #23252f;
+            padding-top: 8px;
+        }
+
+        #status-message {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: none;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- O URL ABAIXO JÁ CONTÉM OS PARÂMETROS DE LOOP ATIVOS -->
+    <div class="video-background">
+        <iframe
+            src="https://www.youtube.com/embed/CALw6QK6Qp8?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&fs=0&disablekb=1&iv_load_policy=3&loop=1&playlist=CALw6QK6Qp8"
+            title="Player"
+            allow="autoplay; encrypted-media"
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Henrique faz 18!</h1>
+            <p class="subheader">[ LEVEL 18 UNLOCKED ]</p>
+        </div>
+
+        <div class="intro">
+            <p>Após muitos desafios e conquistas, ele está iniciando uma nova fase da sua jornada.</p>
+            <p>E para celebrar esse achievement especial, quer reunir o melhor squad ao seu lado.</p>
+            <p>Prepare-se para essa missão e venha fazer parte desse momento épico!</p>
+        </div>
+
+        <div class="details-box">
+            <div class="detail-item">
+                <span class="icon">📅</span>
+                <div class="detail-text">
+                    <strong>📅 DATA DA MISSÃO</strong>
+                    <span>Sábado, 11 de julho de 2026</span>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="icon">⏰</span>
+                <div class="detail-text">
+                    <strong>⏰ START TIME</strong>
+                    <span>17h00</span>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="icon">📍</span>
+                <div class="detail-text">
+                    <strong>📍 MAP COORDENADAS</strong>
+                    <span>
+                        <a href="https://www.google.com/maps/place/S%C3%ADtio+Nova+Vida+-+Caratinga/data=!4m2!3m1!1s0x0:0x6b5c12209e1ece69" target="_blank" class="map-link-text">
+                            Sítio Nova Vida<br>
+                            <small style="color: #888;">BR-116, Km 517,2 — entre Caratinga e Ubaporanga, MG</small>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://www.google.com/maps/place/S%C3%ADtio+Nova+Vida+-+Caratinga/data=!4m2!3m1!1s0x0:0x6b5c12209e1ece69" target="_blank" class="btn btn-map">
+            🗺️ Abrir Mapa do GPS
+        </a>
+
+        <p class="deadline">⌛ INSIRA SEU IDENTIFICADOR E CONFIRME ATÉ 01/07:</p>
+
+        <div class="input-group">
+            <label for="guest-name">> Insira seu nome completo:</label>
+            <input type="text" id="guest-name" class="input-name" placeholder="Ex: João Silva" required>
+        </div>
+
+        <div class="actions">
+            <button type="button" onclick="enviarResposta('SIM, vou estar lá!')" id="btn-ready" class="btn btn-yes">
+                🎮 READY (Sim, vou!)
+            </button>
+            <button type="button" onclick="enviarResposta('Não vou conseguir ir.')" id="btn-quit" class="btn btn-no">
+                ❌ QUIT (Não vou)
+            </button>
+        </div>
+
+        <div id="status-message"></div>
+
+        <div class="stats-box">
+            <div class="stats-title">📊 STATUS DO SQUAD</div>
+            <div class="stats-row">
+                <span class="stats-label" style="color:var(--btn-yes)">READY</span>
+                <div class="bar-track">
+                    <div id="bar-yes-fill" class="bar-fill bar-yes"></div>
+                </div>
+                <span id="val-yes" class="stats-value" style="color:var(--btn-yes)">0</span>
+            </div>
+            <div class="stats-row">
+                <span class="stats-label" style="color:var(--btn-no)">QUIT</span>
+                <div class="bar-track">
+                    <div id="bar-no-fill" class="bar-fill bar-no"></div>
+                </div>
+                <span id="val-no" class="stats-value" style="color:var(--btn-no)">0</span>
+            </div>
+            <div id="val-total" class="stats-total">TOTAL DE RESPOSTAS: 0</div>
+        </div>
+
+        <div class="footer">
+            GG WP! TE ESPERAMOS! 🥂
+        </div>
+    </div>
+
+    <script>
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2-I1LsYjFUr-Y3_z56sMzETdt88MYF0xuAVrk4NFcIPlwtpQxDDpUyCsf3sFDu6SZGg/exec";
+    
+        window.onload = function() {
+            carregarMetricasDashboard();
+        };
+
+        async function carregarMetricasDashboard() {
+            try {
+                const res = await fetch(`${APPS_SCRIPT_URL}?action=getStats`);
+                const data = await res.json();
+
+                const ready = data.ready || 0;
+                const quit = data.quit || 0;
+                const total = ready + quit;
+
+                const pctReady = total > 0 ? (ready / total) * 100 : 0;
+                const pctQuit = total > 0 ? (quit / total) * 100 : 0;
+
+                document.getElementById('val-yes').innerText = ready;
+                document.getElementById('val-no').innerText = quit;
+                document.getElementById('val-total').innerText = `TOTAL DE RESPOSTAS: ${total}`;
+
+                document.getElementById('bar-yes-fill').style.width = `${pctReady}%`;
+                document.getElementById('bar-no-fill').style.width = `${pctQuit}%`;
+
+            } catch (err) {
+                console.warn("Modo offline ou erro ao carregar contadores iniciais:", err);
+            }
+        }
+
+        async function enviarResposta(resposta) {
+            const nomeInput = document.getElementById('guest-name');
+            const nome = nomeInput.value.trim();
+            const statusDiv = document.getElementById('status-message');
+            const btnReady = document.getElementById('btn-ready');
+            const btnQuit = document.getElementById('btn-quit');
+
+            if (!nome) {
+                alert("Por favor, digite seu nome para confirmar!");
+                nomeInput.focus();
+                return;
+            }
+
+            btnReady.disabled = true;
+            btnQuit.disabled = true;
+            statusDiv.style.color = "var(--neon-blue)";
+            statusDiv.innerText = "[ ENVIANDO DADOS AO LOBBY... ]";
+            statusDiv.style.display = "block";
+
+            try {
+                const dadosFormulario = new URLSearchParams();
+                dadosFormulario.append('nome', nome);
+                dadosFormulario.append('presenca', resposta);
+
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: dadosFormulario.toString()
+                });
+
+                statusDiv.style.color = "var(--btn-yes)";
+                statusDiv.innerText = "✨ RESPOSTA GRAVADA COM SUCESSO! OBRIGADO.";
+                nomeInput.value = "";
+
+                setTimeout(carregarMetricasDashboard, 1500);
+
+            } catch (error) {
+                console.error(error);
+                statusDiv.style.color = "var(--btn-no)";
+                statusDiv.innerText = "❌ ERRO AO ENVIAR. TENTE NOVAMENTE.";
+                btnReady.disabled = false;
+                btnQuit.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
